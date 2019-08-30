@@ -1,5 +1,5 @@
 # TTN Cayenne Decoder
-### Decoder Cayenne LPP within The Things Networ
+### Decoder Cayenne LPP within The Things Network
 ---
 This decoder code is only applicable for **LoRa Devices** with a “**Cayenne LPP**” format in their payload. For more information consult the documentation [aqui](https://github.com/myDevicesIoT/cayenne-docs/blob/master/docs/LORA.md).
 
