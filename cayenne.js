@@ -1,7 +1,7 @@
 // Decode an uplink message from a buffer
 // example: 0A02019014880323B6F0AFB302BF20
 
-function Decoder(payload, port)
+function Decoder(bytes, port)
 {
 	var decoded = {};
 	var i = 0;
@@ -22,16 +22,16 @@ function Decoder(payload, port)
 	decoded.type = "position";
 
 	if (port === 2){
-		while(i < payload.length){
-			s_ch = payload[i++]; 	//Channel
-			s_type = payload[i++];	//Message Type
+		while(i < bytes.length){
+			s_ch = bytes[i++]; 	//Channel
+			s_type = bytes[i++];	//Message Type
 			s_size = sensor_types[s_type].size; //Data length
 
 			switch (s_type) {
 			case 0  :  // Digital Input
 			case 1  :  // Digital Output
 			case 2  :  // Analog Input
-				decoded.battery=((payload[2]<<8 | payload[3]))/100;
+				decoded.battery=((bytes[2]<<8 | bytes[3]))/100;
 				break;
 			case 3  :  // Analog Output
 			case 101:  // Illuminance Sensor
@@ -41,9 +41,9 @@ function Decoder(payload, port)
 			case 113:  // Accelerometer
 			case 115:  // Barometer
 			case 136:
-				decoded.latitude = (payload[6]<<16 | payload[7]<<8 | payload[8])/10000;
-				decoded.longitude = ((payload[9]<<16 | payload[10]<<8 | payload[11])/10000);
-				decoded.altitude=((payload[12]<<16 | payload[13]<<8 | payload[14])/100);
+				decoded.latitude = (bytes[6]<<16 | bytes[7]<<8 | bytes[8])/10000;
+				decoded.longitude = ((bytes[9]<<16 | bytes[10]<<8 | bytes[11])/10000);
+				decoded.altitude=((bytes[12]<<16 | bytes[13]<<8 | bytes[14])/100);
 				break;
 			}
 			i += s_size;
