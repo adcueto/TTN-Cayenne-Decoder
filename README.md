@@ -48,8 +48,8 @@ function Decoder(bytes, port)
 			case 113:  // Accelerometer
 			case 115:  // Barometer
 			case 136:
-				decoded.latitude = (bytes[6]<<16 | bytes[7]<<8 | bytes[8])/10000;
-				decoded.longitude = ((bytes[9]<<16 | bytes[10]<<8 | bytes[11])/10000);
+				decoded.latitude = (bytes[6]<<24>>8 | bytes[7]<<8 | bytes[8])/10000;
+				decoded.longitude = (bytes[9]<<24>>8 | bytes[10]<<8 | bytes[11])/10000;
 				decoded.altitude=((bytes[12]<<16 | bytes[13]<<8 | bytes[14])/100);
 				break;
 			}
@@ -69,8 +69,7 @@ We paste the code in the "**decoder**" tab and we save it in "**save payload fun
 
 The payload received from the device is contained in the "bytes" variable, after receiving it it is decoded to display the value of each sensor in a JSON value.
 
-### Decoder Test: 
+### Decoder Test:
 **Payload**: 0A02019014880323B6F0AFB302BF20
 
 ![payload](https://dl.dropboxusercontent.com/s/r6zcyzg0w4q57px/payload-ttn.png)
-
