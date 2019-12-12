@@ -41,8 +41,8 @@ function Decoder(bytes, port)
 			case 113:  // Accelerometer
 			case 115:  // Barometer
 			case 136:
-				decoded.latitude = (bytes[6]<<16 | bytes[7]<<8 | bytes[8])/10000;
-				decoded.longitude = ((bytes[9]<<16 | bytes[10]<<8 | bytes[11])/10000);
+				decoded.latitude = (bytes[6]<<24>>8 | bytes[7]<<8 | bytes[8])/10000;
+				decoded.longitude = (bytes[9]<<24>>8 | bytes[10]<<8 | bytes[11])/10000;
 				decoded.altitude=((bytes[12]<<16 | bytes[13]<<8 | bytes[14])/100);
 				break;
 			}
